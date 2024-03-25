@@ -50,7 +50,7 @@ include_once '../models/_navbar.php';
                 <div class="dash-count">
                     <div class="dash-counts">
                         <h4>100</h4>
-                        <h5>Total pays</h5>
+                        <h5>Total plainte</h5>
                     </div>
                     <div class="dash-imgs">
                         <i data-feather="user"></i>
@@ -61,27 +61,25 @@ include_once '../models/_navbar.php';
                 <div class="dash-count das1">
                     <div class="dash-counts">
                         <h4>100</h4>
-                        <h5>Total pays actif</h5>
+                        <h5>Total plainte en </h5>
                     </div>
                     <div class="dash-imgs">
                         <i data-feather="user-check"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 col-12 d-flex">
+            <!--<div class="col-lg-3 col-sm-6 col-12 d-flex">
                 <div class="dash-count das2">
                     <div class="dash-counts">
                         <h4>100</h4>
-                        <h5>Total pays inactif</h5>
+                        <h5>Total plainte inactif</h5>
                     </div>
                     <div class="dash-imgs">
                         <i data-feather="file-text"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 col-12 d-flex">
-
-            </div>
+            <div class="col-lg-3 col-sm-6 col-12 d-flex"></div>-->
         </div>
     </div>
 </div>
