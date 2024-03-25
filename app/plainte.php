@@ -1,5 +1,5 @@
 <?php
-$title = "Pays";
+$title = "Plainte";
 include_once '../models/_header.php';
 include_once '../models/_navbar.php';
 ?>
@@ -53,18 +53,18 @@ include_once '../models/_navbar.php';
                         <h5>Total plainte</h5>
                     </div>
                     <div class="dash-imgs">
-                        <i data-feather="user"></i>
+                        <i data-feather="file"></i>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                <div class="dash-count das1">
+                <div class="dash-count das2">
                     <div class="dash-counts">
                         <h4>100</h4>
-                        <h5>Total plainte en </h5>
+                        <h5>Total plainte en Côte d'Ivoire</h5>
                     </div>
                     <div class="dash-imgs">
-                        <i data-feather="user-check"></i>
+                        <i data-feather="file"></i>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@ include_once '../models/_navbar.php';
                 <h6>...........</h6>
             </div>
             <div class="page-btn">
-                <a href="javascript:void(0);" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#create"><img src="../vendors/assets/img/icons/plus-circle.svg" class="me-2" alt="img">Ajouter un pays</a>
+                <a href="javascript:void(0);" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#create"><img src="../vendors/assets/img/icons/plus-circle.svg" class="me-2" alt="img">Ajouter une plainte</a>
             </div>
         </div>
         <div class="card">
@@ -171,7 +171,7 @@ include_once '../models/_navbar.php';
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ajouter un pays</h5>
+                <h5 class="modal-title">Ajouter une plainte</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
@@ -195,10 +195,147 @@ include_once '../models/_navbar.php';
                                 </div>
                             </div>
                             <div class="text-end">
-                                <button type="submit" name="ajouter" class="btn btn-primary">Ajouter un pays</button>
+                                <button type="submit" name="ajouter" class="btn btn-primary">Ajouter une plainte</button>
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="row">
+                    <div class="page-wrapper">
+                        <div class="content">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h4>Product Add</h4>
+                                <h6>Create new product</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="select">
+                                    <option>Choose Category</option>
+                                    <option>Computers</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Sub Category</label>
+                                    <select class="select">
+                                    <option>Choose Sub Category</option>
+                                    <option>Fruits</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Brand</label>
+                        <select class="select">
+                        <option>Choose Brand</option>
+                        <option>Brand</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Unit</label>
+                        <select class="select">
+                        <option>Choose Unit</option>
+                        <option>Unit</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>SKU</label>
+                        <input type="text">
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Minimum Qty</label>
+                        <input type="text">
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="text">
+                        </div>
+                        </div>
+                        <div class="col-lg-12">
+                        <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control"></textarea>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Tax</label>
+                        <select class="select">
+                        <option>Choose Tax</option>
+                        <option>2%</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Discount Type</label>
+                        <select class="select">
+                        <option>Percentage</option>
+                        <option>10%</option>
+                        <option>20%</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label>Price</label>
+                        <input type="text">
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                        <label> Status</label>
+                        <select class="select">
+                        <option>Closed</option>
+                        <option>Open</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="col-lg-12">
+                        <div class="form-group">
+                        <label> Product Image</label>
+                        <div class="image-upload">
+                        <input type="file">
+                        <div class="image-uploads">
+                        <img src="assets/img/icons/upload.svg" alt="img">
+                        <h4>Drag and drop a file to upload</h4>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-12">
+                        <a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
+                        <a href="productlist.html" class="btn btn-cancel">Cancel</a>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        </div>
+                        </div>
+                        </div>
                 </div>
             </div>
         </div>
