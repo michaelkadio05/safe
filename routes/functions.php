@@ -131,10 +131,12 @@
     }
 
     // fonction plainte
-    function addPlainte($anony,$auth_data,$fullname,$phone,$email,$habitation,$iDpays,$iDregion,$iDville,$iDcommune,$iDage,$iDstatut_pro,$iDnscolaire,$etab_scolaire,$iDclasse,$iDthematique,$name_agent,$lieu_sssu,$lieu_date,$lieu_heure,$desc_plainte,$confirmation)
+    function addPlainte($anony, $auth_data, $fullname, $phone, $email, $habitation, $id_pays, $id_region, $id_ville, $id_commune, $id_age, $id_statut_pro, $id_nscolaire, $etab_scolaire, $id_classe, $id_thematique, $name_agent, $lieu_sssu, $date_lieu, $lieu_heure, $desc_plainte, $confirmation)
     {
         global $db;
-        $sql = "INSERT INTO plainte (anony,auth_data,fullname,phone,email,habitation,iDpays,iDregion,iDville,iDcommune,iDage,iDstatut_pro,iDnscolaire,etab_scolaire,iDclasse,iDthematique,name_agent,lieu_sssu,lieu_date,lieu_heure,desc_plainte,confirmation, record_plainte) VALUES (:anony,:auth_data,:fullname,:phone,:email,:habitation,:iDpays,:iDregion,:iDville,:iDcommune,:iDage,:iDstatut_pro,:iDnscolaire,:etab_scolaire,:iDclasse,:iDthematique,:name_agent,:lieu_sssu,:lieu_date,:lieu_heure,:desc_plainte; :confirmation, NOW())";
+        $sql = "INSERT INTO plainte (anony, auth_data, fullname, phone, email, habitation, id_pays, id_region, id_ville, id_commune, id_age, id_statut_pro, id_nscolaire, etab_scolaire, id_classe, id_thematique, name_agent, lieu_sssu, lieu_date, lieu_heure, desc_plainte, confirmation, record_plainte) 
+        VALUES 
+        (:anony, :auth_data, :fullname, :phone, :email, :habitation, :id_pays, :id_region, :id_ville, :id_commune, :id_age, :id_statut_pro, :id_nscolaire, :etab_scolaire, :id_classe, :id_thematique, :name_agent, :lieu_sssu, :lieu_date, :lieu_heure, :desc_plainte; :confirmation, NOW())";
         $req = $db->prepare($sql);
         $req ->bindValue(':anony',$anony, PDO::PARAM_STR); 
         $req ->bindValue(':auth_data',$auth_data, PDO::PARAM_STR);     
@@ -142,19 +144,19 @@
         $req ->bindValue(':phone',$phone, PDO::PARAM_STR); 
         $req ->bindValue(':email',$email, PDO::PARAM_STR); 
         $req ->bindValue(':habitation',$habitation, PDO::PARAM_STR);      
-        $req ->bindValue(':iDpays',$iDpays, PDO::PARAM_INT);  
-        $req ->bindValue(':iDregion',$iDregion, PDO::PARAM_INT);    
-        $req ->bindValue(':iDville',$iDville, PDO::PARAM_INT);   
-        $req ->bindValue(':iDcommune',$iDcommune, PDO::PARAM_INT);     
-        $req ->bindValue(':iDage',$iDage, PDO::PARAM_INT); 
-        $req ->bindValue(':iDstatut_pro',$iDstatut_pro, PDO::PARAM_INT);      
-        $req ->bindValue(':iDnscolaire',$iDnscolaire, PDO::PARAM_INT);       
+        $req ->bindValue(':id_pays',$iDpays, PDO::PARAM_INT);  
+        $req ->bindValue(':id_region',$iDregion, PDO::PARAM_INT);    
+        $req ->bindValue(':id_ville',$iDville, PDO::PARAM_INT);   
+        $req ->bindValue(':id_commune',$iDcommune, PDO::PARAM_INT);     
+        $req ->bindValue(':id_age',$iDage, PDO::PARAM_INT); 
+        $req ->bindValue(':id_statut_pro',$iDstatut_pro, PDO::PARAM_INT);      
+        $req ->bindValue(':id_nscolaire',$iDnscolaire, PDO::PARAM_INT);       
         $req ->bindValue(':etab_scolaire',$etab_scolaire, PDO::PARAM_STR);
-        $req ->bindValue(':iDclasse',$iDclasse, PDO::PARAM_INT);    
-        $req ->bindValue(':iDthematique',$iDthematique, PDO::PARAM_INT);        
+        $req ->bindValue(':id_classe',$iDclasse, PDO::PARAM_INT);    
+        $req ->bindValue(':id_thematique',$iDthematique, PDO::PARAM_INT);        
         $req ->bindValue(':name_agent',$name_agent, PDO::PARAM_STR);      
         $req ->bindValue(':lieu_sssu',$lieu_sssu, PDO::PARAM_STR);     
-        $req ->bindValue(':lieu_date',$lieu_date, PDO::PARAM_STR);     
+        $req ->bindValue(':lieu_date',$date_lieu, PDO::PARAM_STR);     
         $req ->bindValue(':lieu_heure',$lieu_heure, PDO::PARAM_STR);      
         $req ->bindValue(':desc_plainte',$desc_plainte, PDO::PARAM_STR);
         $req ->bindValue(':confirmation',$confirmation, PDO::PARAM_STR);
@@ -168,22 +170,22 @@
     }
 
     // fonction Pays
-    function addPays($libelles)
+    function addPays($libelle, $etat)
     {
         global $db;
-
-        $sql = "INSERT INTO structure (libelles,libdate) VALUES(:libelles,NOW())";
+        $sql = "INSERT INTO pays (libelle, etat, record_pays) VALUES(:libelle, :etat, NOW())";
         $req = $db->prepare($sql);
-        $req ->bindValue(':libelles', $libelles, PDO::PARAM_STR);
+        $req ->bindValue(':libelle', $libelle, PDO::PARAM_STR);
+        $req ->bindValue(':etat', $etat, PDO::PARAM_STR);
         $req->execute();
             
     }
 
-    function updatePays($id,$libelles)
+    function updatePays($id)
     {
         global $db;
 
-        $sql = "UPDATE structure SET libelles='$libelles' WHERE id='$id'";
+        $sql = "UPDATE pays SET libelle='$libelle' WHERE id='$id'";
         $req = $db->prepare($sql);
         $req->execute();
     }

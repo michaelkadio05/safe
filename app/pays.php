@@ -1,7 +1,55 @@
 <?php
+require_once '../routes/functions.php';
 $title = "Pays";
 include_once '../models/_header.php';
 include_once '../models/_navbar.php';
+
+    if(isset($_POST['ajouter']))
+    {
+        $libelle = htmlspecialchars(trim(strip_tags($_POST['libelle'])));
+        $etat = htmlspecialchars(trim(strip_tags($_POST['etat'])));
+
+        if(!empty($_POST['libelle']))
+        {
+            if(!empty($_POST['etat']))
+            {
+                addPays($libelle, $etat);
+                $message = 
+                    "
+                    <div class='card-body'>
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            <strong>Enregistrement réussi !</strong>
+                            Le pays a bien été ajouter.
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    </div>
+                    ";
+            }else{
+                $erreur[] = 
+                    "
+                    <div class='card-body'>
+                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            <strong>Erreur !</strong>
+                            le champ etat est vide
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    </div>
+                    ";
+            }
+        }else{
+                $erreur[] = 
+                    "
+                    <div class='card-body'>
+                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            <strong>Erreur !</strong>
+                            le champ libellé est vide
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    </div>
+                    ";
+            }
+
+    }
 ?>
 <div class="page-wrapper">
     <div class="content">
@@ -176,6 +224,21 @@ include_once '../models/_navbar.php';
                 <h5 class="modal-title">Ajouter un pays</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
+            <div class="row">
+                        <div class="col-12">
+                            <?php 
+                            if(!empty($erreur)){
+
+                                foreach($erreur as $erreurs)
+                                {
+                                    echo $erreurs;
+                                }
+                            }elseif (!empty($message)){
+                               echo $message;
+                            } 
+                            ?>
+                        </div>
+                    </div>
             <div class="modal-body">
                 <div class="row">
                     <form method="POST" class="form-group">
@@ -188,9 +251,9 @@ include_once '../models/_navbar.php';
                             </div>
                             <div class="col-lg-6 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <label class="form-label">Statut</label>
-                                    <select class="form-control" name="statut" required value="<?=$_POST['statut']?>">
-                                        <option value="">Select un statut</option>
+                                    <label class="form-label">Etat</label>
+                                    <select class="form-control" name="etat" required value="<?=$_POST['etat']?>">
+                                        <option value="">Select etat</option>
                                         <option value="Actif">Actif</option>
                                         <option value="Inactif">Inactif</option>
                                     </select>

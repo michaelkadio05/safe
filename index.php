@@ -1,30 +1,51 @@
 <?php
     require_once 'routes/functions.php';
-
     if(isset($_POST['plainte']))
     {
         $anony = htmlspecialchars(trim(strip_tags($_POST['anony'])));
+
         $auth_data = htmlspecialchars(trim(strip_tags($_POST['auth_data'])));
+
         $fullname = htmlspecialchars(trim(strip_tags($_POST['fullname'])));
+
         $phone = htmlspecialchars(trim(strip_tags($_POST['phone'])));
+
         $email = htmlspecialchars(trim(strip_tags($_POST['email'])));
+
         $habitation = htmlspecialchars(trim(strip_tags($_POST['habitation'])));
-        $iDpays = htmlspecialchars(trim(strip_tags($_POST['iDpays'])));
-        $iDregion = htmlspecialchars(trim(strip_tags($_POST['iDregion'])));
-        $iDville = htmlspecialchars(trim(strip_tags($_POST['iDville'])));
-        $iDcommune = htmlspecialchars(trim(strip_tags($_POST['iDcommune'])));
-        $iDage = htmlspecialchars(trim(strip_tags($_POST['iDage'])));
-        $iDstatut_pro = htmlspecialchars(trim(strip_tags($_POST['iDstatut_pro'])));
-        $iDnscolaire = htmlspecialchars(trim(strip_tags($_POST['iDnscolaire'])));
+
+        $id_pays = htmlspecialchars(trim(strip_tags($_POST['id_pays'])));
+
+        $id_region = htmlspecialchars(trim(strip_tags($_POST['id_region'])));
+
+        $id_ville = htmlspecialchars(trim(strip_tags($_POST['id_ville'])));
+
+        $id_commune = htmlspecialchars(trim(strip_tags($_POST['id_commune'])));
+
+        $id_age = htmlspecialchars(trim(strip_tags($_POST['id_age'])));
+
+        $id_statut_pro = htmlspecialchars(trim(strip_tags($_POST['id_statut_pro'])));
+
+        $id_nscolaire = htmlspecialchars(trim(strip_tags($_POST['id_nscolaire'])));
+
         $etab_scolaire = htmlspecialchars(trim(strip_tags($_POST['etab_scolaire'])));
-        $iDclasse = htmlspecialchars(trim(strip_tags($_POST['iDclasse'])));
-        $iDthematique = htmlspecialchars(trim(strip_tags($_POST['iDthematique'])));
+
+        $id_classe = htmlspecialchars(trim(strip_tags($_POST['id_classe'])));
+
+        $id_thematique = htmlspecialchars(trim(strip_tags($_POST['id_thematique'])));
+
         $name_agent = htmlspecialchars(trim(strip_tags($_POST['name_agent'])));
+
         $lieu_sssu = htmlspecialchars(trim(strip_tags($_POST['lieu_sssu'])));
+
         $temps = strtr($_REQUEST['lieu_date'], '/', '-');
-        $lieu_date = date('Y-m-d', strtotime($temps));
+
+        $date_lieu = date('Y-m-d', strtotime($temps));
+
         $lieu_heure = htmlspecialchars(trim(strip_tags($_POST['lieu_heure'])));
+
         $desc_plainte = htmlspecialchars(trim(strip_tags($_POST['desc_plainte'])));
+
         $confirmation = htmlspecialchars(trim(strip_tags($_POST['confirmation'])));
         
         if(!empty($_POST['anony']))
@@ -39,25 +60,25 @@
                         {
                             if(!empty($_POST['habitation']))
                             {
-                                if(!empty($_POST['iDpays']))
+                                if(!empty($_POST['id_pays']))
                                 {
-                                    if(!empty($_POST['iDregion']))
+                                    if(!empty($_POST['id_region']))
                                     {
-                                        if(!empty($_POST['iDville']))
+                                        if(!empty($_POST['id_ville']))
                                         {
-                                            if(!empty($_POST['iDcommune']))
+                                            if(!empty($_POST['id_commune']))
                                             {
-                                                if(!empty($_POST['iDage']))
+                                                if(!empty($_POST['id_age']))
                                                 {
-                                                    if(!empty($_POST['iDstatut_pro']))
+                                                    if(!empty($_POST['id_statut_pro']))
                                                     {
-                                                        if(!empty($_POST['iDnscolaire']))
+                                                        if(!empty($_POST['id_nscolaire']))
                                                         {
                                                             if(!empty($_POST['etab_scolaire']))
                                                             {
-                                                                if(!empty($_POST['iDclasse']))
+                                                                if(!empty($_POST['id_classe']))
                                                                 {
-                                                                    if(!empty($_POST['iDthematique']))
+                                                                    if(!empty($_POST['id_thematique']))
                                                                     {
                                                                         if(!empty($_POST['name_agent']))
                                                                         {
@@ -74,7 +95,7 @@
                                                                                                 $nombre = mb_strlen($phone);
                                                                                                 if($nombre == 10)
                                                                                                 {
-                                                                                                    addPlainte($anony,$auth_data,$fullname,$phone,$email,$habitation,$iDpays,$iDregion,$iDville,$iDcommune,$iDage,$iDstatut_pro,$iDnscolaire,$etab_scolaire,$iDclasse,$iDthematique,$name_agent,$lieu_sssu,$lieu_date,$lieu_heure,$desc_plainte,$confirmation);
+                                                                                                    addPlainte($anony, $auth_data, $fullname, $phone, $email, $habitation, $id_pays, $id_region, $id_ville, $id_commune, $id_age, $id_statut_pro, $id_nscolaire, $etab_scolaire, $id_classe, $id_thematique, $name_agent, $lieu_sssu, $date_lieu, $lieu_heure, $desc_plainte, $confirmation);
                                                                                                     $message = 
                                                                                                         "
                                                                                                         <div class='card-body'>
@@ -389,8 +410,7 @@
         }
         else
             {
-                $erreur[] = 
-                    "
+                $erreur[] ="
                     <div class='card-body'>
                         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
                             <strong>Erreur !</strong>
@@ -527,7 +547,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Téléphone</label>
-                                    <input type="number" class="form-control" name="phone"  value="<?=$_POST['phone']?>">
+                                    <input type="text" class="form-control" name="phone"  value="<?=$_POST['phone']?>">
                                 </div>
                             </div>
 
@@ -548,7 +568,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Pays</label>
-                                    <select name="iDpays"  value="<?=$_POST['iDpays']?>" class="form-control">
+                                    <select name="id_pays" class="form-control">
                                     <option value="">-- select pays --</option>
                                     <?php 
                                         global $db;
@@ -559,7 +579,7 @@
                                         foreach($result as $results)       
                                         { 
                                     ?>
-                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                     <?php 
                                         } 
                                     ?>
@@ -570,7 +590,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Région</label>
-                                    <select name="iDregion"  value="<?=$_POST['iDregion']?>" class="form-control">
+                                    <select name="id_region"  class="form-control">
                                     <option value="">-- select region --</option>
                                     <?php 
                                         global $db;
@@ -581,7 +601,7 @@
                                         foreach($result as $results)       
                                         { 
                                     ?>
-                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                     <?php 
                                         } 
                                     ?>
@@ -592,7 +612,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Ville</label>
-                                    <select name="iDville"  value="<?=$_POST['iDville']?>" class="form-control">
+                                    <select name="id_ville"  class="form-control">
                                     <option value="">-- select ville --</option>
                                     <?php 
                                         global $db;
@@ -603,7 +623,7 @@
                                         foreach($result as $results)       
                                         { 
                                     ?>
-                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                     <?php 
                                         } 
                                     ?>
@@ -614,7 +634,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Commune</label>
-                                    <select name="iDcommune"  value="<?=$_POST['iDcommune']?>" class="form-control">
+                                    <select name="id_commune" class="form-control">
                                     <option value="">-- select commune --</option>
                                     <?php 
                                         global $db;
@@ -625,7 +645,7 @@
                                         foreach($result as $results)       
                                         { 
                                     ?>
-                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                     <?php 
                                         } 
                                     ?>
@@ -636,7 +656,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Âge</label>
-                                    <select name="iDage"  value="<?=$_POST['iDage']?>" class="form-control">
+                                    <select name="id_age" class="form-control">
                                     <option>-- select age --</option>
                                     <?php 
                                         global $db;
@@ -647,7 +667,7 @@
                                         foreach($result as $results)       
                                         { 
                                     ?>
-                                        <option value="<?=$results->id;?>"><?=$results->libelle; ?> ans</option>
+                                        <option value="<?=$results->id ?>"><?=$results->libelle ?> ans</option>
                                     <?php 
                                         } 
                                     ?>
@@ -661,7 +681,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Situation professionnelle</label>
-                                    <select name="iDstatut_pro"  value="<?=$_POST['iDstatut_pro']?>" class="form-control">
+                                    <select name="id_statut_pro" class="form-control">
                                         <option value="">-- select situation pro --</option>
                                         <?php 
                                             global $db;
@@ -672,7 +692,7 @@
                                             foreach($result as $results)       
                                             { 
                                         ?>
-                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                            <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                         <?php 
                                             } 
                                         ?>
@@ -683,7 +703,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Niveau scolaire</label>
-                                    <select name="iDnscolaire"  value="<?=$_POST['iDnscolaire']?>" class="form-control">
+                                    <select name="id_nscolaire"  class="form-control">
                                         <option value="">-- select niveau scolaire --</option>
                                         <?php 
                                             global $db;
@@ -694,7 +714,7 @@
                                             foreach($result as $results)       
                                             { 
                                         ?>
-                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                            <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                         <?php 
                                             } 
                                         ?>
@@ -712,7 +732,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Classe</label>
-                                    <select name="iDclasse"  value="<?=$_POST['iDclasse']?>" class="form-control">
+                                    <select name="id_classe" class="form-control">
                                         <option value="">-- select classe --</option>
                                         <?php 
                                             global $db;
@@ -723,7 +743,7 @@
                                             foreach($result as $results)       
                                             { 
                                         ?>
-                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                            <option value="<?= $results->id ?>"><?=$results->libelle ?></option>
                                         <?php 
                                             } 
                                         ?>    
@@ -737,7 +757,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Thématique</label>
-                                    <select name="iDthematique"  value="<?=$_POST['iDthematique']?>" class="form-control">
+                                    <select name="id_thematique" class="form-control">
                                     <option value="">-- select thématique --</option>
                                         <?php 
                                             global $db;
@@ -748,7 +768,7 @@
                                             foreach($result as $results)       
                                             { 
                                         ?>
-                                            <option value="<?= $results->id;?>"><?=$results->libelle;?></option>
+                                            <option value="<?= $results->id ?>"><?=$results->libelle?></option>
                                         <?php 
                                             } 
                                         ?>
