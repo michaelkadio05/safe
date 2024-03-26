@@ -134,7 +134,7 @@
     function addPlainte($anony,$auth_data,$fullname,$phone,$email,$habitation,$iDpays,$iDregion,$iDville,$iDcommune,$iDage,$iDstatut_pro,$iDnscolaire,$etab_scolaire,$iDclasse,$iDthematique,$name_agent,$lieu_sssu,$lieu_date,$lieu_heure,$desc_plainte,$confirmation)
     {
         global $db;
-        $sql = "INSERT INTO plainte (anony,auth_data,fullname,phone,email,habitation,iDpays,iDregion,iDville,iDcommune,iDage,iDstatut_pro,iDnscolaire,etab_scolaire,iDclasse,iDthematique,name_agent,lieu_sssu,lieu_date,lieu_heure,desc_plainte,confirmation, record_plainte) VALUES(:anony,:auth_data,:fullname,:phone,:email,:habitation,:iDpays,:iDregion,:iDville,:iDcommune,:iDage,:iDstatut_pro,:iDnscolaire,:etab_scolaire,:iDclasse,:iDthematique,:name_agent,:lieu_sssu,:lieu_date,:lieu_heure,:desc_plainte; :confirmation, NOW())";
+        $sql = "INSERT INTO plainte (anony,auth_data,fullname,phone,email,habitation,iDpays,iDregion,iDville,iDcommune,iDage,iDstatut_pro,iDnscolaire,etab_scolaire,iDclasse,iDthematique,name_agent,lieu_sssu,lieu_date,lieu_heure,desc_plainte,confirmation, record_plainte) VALUES (:anony,:auth_data,:fullname,:phone,:email,:habitation,:iDpays,:iDregion,:iDville,:iDcommune,:iDage,:iDstatut_pro,:iDnscolaire,:etab_scolaire,:iDclasse,:iDthematique,:name_agent,:lieu_sssu,:lieu_date,:lieu_heure,:desc_plainte; :confirmation, NOW())";
         $req = $db->prepare($sql);
         $req ->bindValue(':anony',$anony, PDO::PARAM_STR); 
         $req ->bindValue(':auth_data',$auth_data, PDO::PARAM_STR);     
@@ -156,7 +156,7 @@
         $req ->bindValue(':lieu_sssu',$lieu_sssu, PDO::PARAM_STR);     
         $req ->bindValue(':lieu_date',$lieu_date, PDO::PARAM_STR);     
         $req ->bindValue(':lieu_heure',$lieu_heure, PDO::PARAM_STR);      
-        $req ->bindValue(':desc_plaint',$desc_plaint, PDO::PARAM_STR);
+        $req ->bindValue(':desc_plainte',$desc_plainte, PDO::PARAM_STR);
         $req ->bindValue(':confirmation',$confirmation, PDO::PARAM_STR);
         $req->execute();  
     }

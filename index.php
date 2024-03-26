@@ -47,7 +47,7 @@
                                         {
                                             if(!empty($_POST['iDcommune']))
                                             {
-                                                if(!empty($_POST['iiDage']))
+                                                if(!empty($_POST['iDage']))
                                                 {
                                                     if(!empty($_POST['iDstatut_pro']))
                                                     {
@@ -255,7 +255,7 @@
                                                             <div class='card-body'>
                                                                 <div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                                                     <strong>Erreur !</strong>
-                                                                    le champ age est vide
+                                                                    le champ âge est vide
                                                                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                                                 </div>
                                                             </div>
@@ -394,7 +394,7 @@
                     <div class='card-body'>
                         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
                             <strong>Erreur !</strong>
-                            le champ autoorisation  de donnée anonyme ou non anonyme est vide
+                            le champ autorisation  de donnée anonyme ou non anonyme est vide
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                         </div>
                     </div>
@@ -457,14 +457,19 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <?php if(!empty($erreur)){
+                            <?php 
+                            if(!empty($erreur)){
 
                                 foreach($erreur as $erreurs)
                                 {
                                     echo $erreurs;
                                 }
-
-                            } ?>
+                            }
+                            elseif (!empty($message)) 
+                            {
+                               echo $message;
+                            } 
+                            ?>
                         </div>
                     </div>
 
@@ -632,7 +637,7 @@
                                 <div class="form-group">
                                     <label>Âge</label>
                                     <select name="iDage"  value="<?=$_POST['iDage']?>" class="form-control">
-                                    <option value="">-- select age --</option>
+                                    <option>-- select age --</option>
                                     <?php 
                                         global $db;
                                         $sql = 'SELECT * FROM age';
@@ -642,7 +647,7 @@
                                         foreach($result as $results)       
                                         { 
                                     ?>
-                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?> ans</option>
+                                        <option value="<?=$results->id;?>"><?=$results->libelle; ?> ans</option>
                                     <?php 
                                         } 
                                     ?>
@@ -743,7 +748,7 @@
                                             foreach($result as $results)       
                                             { 
                                         ?>
-                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                            <option value="<?= $results->id;?>"><?=$results->libelle;?></option>
                                         <?php 
                                             } 
                                         ?>
