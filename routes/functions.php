@@ -144,16 +144,16 @@
         $req ->bindValue(':phone',$phone, PDO::PARAM_STR); 
         $req ->bindValue(':email',$email, PDO::PARAM_STR); 
         $req ->bindValue(':habitation',$habitation, PDO::PARAM_STR);      
-        $req ->bindValue(':id_pays',$iDpays, PDO::PARAM_INT);  
-        $req ->bindValue(':id_region',$iDregion, PDO::PARAM_INT);    
-        $req ->bindValue(':id_ville',$iDville, PDO::PARAM_INT);   
-        $req ->bindValue(':id_commune',$iDcommune, PDO::PARAM_INT);     
-        $req ->bindValue(':id_age',$iDage, PDO::PARAM_INT); 
-        $req ->bindValue(':id_statut_pro',$iDstatut_pro, PDO::PARAM_INT);      
-        $req ->bindValue(':id_nscolaire',$iDnscolaire, PDO::PARAM_INT);       
+        $req ->bindValue(':id_pays',$id_pays, PDO::PARAM_INT);  
+        $req ->bindValue(':id_region',$id_region, PDO::PARAM_INT);    
+        $req ->bindValue(':id_ville',$id_ville, PDO::PARAM_INT);   
+        $req ->bindValue(':id_commune',$id_commune, PDO::PARAM_INT);     
+        $req ->bindValue(':id_age',$id_age, PDO::PARAM_INT); 
+        $req ->bindValue(':id_statut_pro',$id_statut_pro, PDO::PARAM_INT);      
+        $req ->bindValue(':id_nscolaire',$id_nscolaire, PDO::PARAM_INT);       
         $req ->bindValue(':etab_scolaire',$etab_scolaire, PDO::PARAM_STR);
-        $req ->bindValue(':id_classe',$iDclasse, PDO::PARAM_INT);    
-        $req ->bindValue(':id_thematique',$iDthematique, PDO::PARAM_INT);        
+        $req ->bindValue(':id_classe',$id_classe, PDO::PARAM_INT);    
+        $req ->bindValue(':id_thematique',$id_thematique, PDO::PARAM_INT);        
         $req ->bindValue(':name_agent',$name_agent, PDO::PARAM_STR);      
         $req ->bindValue(':lieu_sssu',$lieu_sssu, PDO::PARAM_STR);     
         $req ->bindValue(':lieu_date',$date_lieu, PDO::PARAM_STR);     
@@ -181,7 +181,7 @@
             
     }
 
-    function updatePays($id)
+    function updatePays($id, $libelle)
     {
         global $db;
 

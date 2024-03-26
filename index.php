@@ -1,6 +1,6 @@
 <?php
     require_once 'routes/functions.php';
-    if(isset($_POST['plainte']))
+    if(isset($_POST['plaintes']))
     {
         $anony = htmlspecialchars(trim(strip_tags($_POST['anony'])));
 
@@ -509,11 +509,11 @@
                                 <div class="form-group">
                                     <label class="form-label">Autorisation d'utilisation de donnée personnelle</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="anony" id="anony" require value="Anonyme">
+                                        <input class="form-check-input" type="radio" name="anony" id="anony"  value="anonyme">
                                         <label class="form-check-label" for="anony">Anonyme</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="anony" id="anony_non" require value="Non-anonyme">
+                                        <input class="form-check-input" type="radio" name="anony" id="anony_non"  value="non-anonyme">
                                         <label class="form-check-label" for="anony_non">Non anonyme</label>
                                     </div>
                                 </div>
@@ -523,13 +523,13 @@
                                 <div class="form-group">
                                     <label class="form-label">Autorisez-vous l'ONG Engage & Share à utiliser vos données ?</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_male" value="Oui">
+                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_male"  value="OUI">
                                         <label class="form-check-label" for="gender_male">
                                         Oui
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_female" value="Non, sauf nom">
+                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_female"  value="Non">
                                         <label class="form-check-label" for="gender_female">
                                         Non (utiliser tout sauf mon nom)
                                         </label>
@@ -568,8 +568,8 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Pays</label>
-                                    <select name="id_pays" class="form-control">
-                                    <option value="">-- select pays --</option>
+                                    <select name="id_pays" class="form-control" require value="<?=$_POST['id_pays']?>">
+                                    
                                     <?php 
                                         global $db;
                                         $sql = 'SELECT * FROM pays';
@@ -590,8 +590,8 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Région</label>
-                                    <select name="id_region"  class="form-control">
-                                    <option value="">-- select region --</option>
+                                    <select name="id_region" require value="<?=$_POST['id_region']?>" class="form-control">
+                                    
                                     <?php 
                                         global $db;
                                         $sql = 'SELECT * FROM region';
@@ -612,8 +612,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Ville</label>
-                                    <select name="id_ville"  class="form-control">
-                                    <option value="">-- select ville --</option>
+                                    <select name="id_ville" require value="<?=$_POST['id_ville']?>" class="form-control">
                                     <?php 
                                         global $db;
                                         $sql = 'SELECT * FROM ville';
@@ -634,8 +633,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Commune</label>
-                                    <select name="id_commune" class="form-control">
-                                    <option value="">-- select commune --</option>
+                                    <select name="id_commune" require value="<?=$_POST['id_commune']?>" class="form-control">
                                     <?php 
                                         global $db;
                                         $sql = 'SELECT * FROM commune';
@@ -656,8 +654,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Âge</label>
-                                    <select name="id_age" class="form-control">
-                                    <option>-- select age --</option>
+                                    <select name="id_age" require value="<?=$_POST['id_age']?>" class="form-control">
                                     <?php 
                                         global $db;
                                         $sql = 'SELECT * FROM age';
@@ -681,8 +678,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Situation professionnelle</label>
-                                    <select name="id_statut_pro" class="form-control">
-                                        <option value="">-- select situation pro --</option>
+                                    <select name="id_statut_pro" require value="<?=$_POST['id_statut_pro']?>" class="form-control">
                                         <?php 
                                             global $db;
                                             $sql = 'SELECT * FROM situation_pro';
@@ -703,8 +699,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Niveau scolaire</label>
-                                    <select name="id_nscolaire"  class="form-control">
-                                        <option value="">-- select niveau scolaire --</option>
+                                    <select name="id_nscolaire" require value="<?=$_POST['id_nscolaire']?>" class="form-control">
                                         <?php 
                                             global $db;
                                             $sql = 'SELECT * FROM nscolaire';
@@ -732,8 +727,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Classe</label>
-                                    <select name="id_classe" class="form-control">
-                                        <option value="">-- select classe --</option>
+                                    <select name="id_classe" require value="<?=$_POST['id_classe']?>" class="form-control">
                                         <?php 
                                             global $db;
                                             $sql = 'SELECT * FROM classe';
@@ -757,8 +751,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Thématique</label>
-                                    <select name="id_thematique" class="form-control">
-                                    <option value="">-- select thématique --</option>
+                                    <select name="id_thematique" require value="<?=$_POST['id_thematique']?>" class="form-control">
                                         <?php 
                                             global $db;
                                             $sql = 'SELECT * FROM thematique';
@@ -823,7 +816,7 @@
                             <div class="col-lg-12 col-sm-6 col-12">
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" require type="radio" name="confirmation" id="confirme" value="oui">
+                                        <input class="form-check-input" require type="radio" name="confirmation" id="confirme" value="Je confirme l'exactitude des informations fournis.">
                                         <label class="form-check-label" for="confirme">
                                         Je confirme l'exactitude des informations fournis.
                                         </label>
@@ -832,7 +825,7 @@
                             </div>
                             <!-- Bouton submit -->
                             <div class="col-lg-12">
-                                <input type="submit" name="plainte" class="btn btn-success me-2" value="Ajouter ma plainte">
+                                <input type="submit" name="plaintes" class="btn btn-success me-2" value="Ajouter ma plainte">
                                 <input type="reset" class="btn btn-danger" value="Annuler la plainte">
                             </div>
 
