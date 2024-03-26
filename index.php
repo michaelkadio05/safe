@@ -1,6 +1,92 @@
+<?php
+    require_once 'routes/functions.php';
+
+    $message = "";
+    $erreur = "";
+
+    if(isset($_POST['plainte']))
+    {
+        $anony = htmlspecialchars(trim(strip_tags($_POST['anony'])));
+        $auth_data = htmlspecialchars(trim(strip_tags($_POST['auth_data'])));
+        $fullname = htmlspecialchars(trim(strip_tags($_POST['fullname'])));
+        $phone = htmlspecialchars(trim(strip_tags($_POST['phone'])));
+        $email = htmlspecialchars(trim(strip_tags($_POST['email'])));
+        $habitation = htmlspecialchars(trim(strip_tags($_POST['habitation'])));
+        $pays = htmlspecialchars(trim(strip_tags($_POST['pays'])));
+        $region = htmlspecialchars(trim(strip_tags($_POST['region'])));
+        $ville = htmlspecialchars(trim(strip_tags($_POST['ville'])));
+        $commune = htmlspecialchars(trim(strip_tags($_POST['commune'])));
+        $age = htmlspecialchars(trim(strip_tags($_POST['age'])));
+        $statut_pro = htmlspecialchars(trim(strip_tags($_POST['statut_pro'])));
+        $nscolaire = htmlspecialchars(trim(strip_tags($_POST['nscolaire'])));
+        $etab_scolaire = htmlspecialchars(trim(strip_tags($_POST['etab_scolaire'])));
+        $classe = htmlspecialchars(trim(strip_tags($_POST['classe'])));
+        $thematique = htmlspecialchars(trim(strip_tags($_POST['thematique'])));
+        $name_agent = htmlspecialchars(trim(strip_tags($_POST['name_agent'])));
+        $lieu_sssu = htmlspecialchars(trim(strip_tags($_POST['lieu_sssu'])));
+        $temps = strtr($_REQUEST['lieu_date'], '/', '-');
+        $lieu_date = date('Y-m-d', strtotime($temps));
+        $lieu_heure = htmlspecialchars(trim(strip_tags($_POST['lieu_heure'])));
+        $desc_plainte = htmlspecialchars(trim(strip_tags($_POST['desc_plainte'])));
+        
+        if(isset($_POST['anony']) && isset($_POST['auth_data']) && isset($_POST['fullname']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['habitation']) && isset($_POST['pays']) && isset($_POST['region']) && isset($_POST['ville']) && isset($_POST['commune']) && isset($_POST['age']) && isset($_POST['statut_pro']) && isset($_POST['nscolaire']) && isset($_POST['etab_scolaire']) && isset($_POST['classe']) && isset($_POST['thematique']) && isset($_POST['name_agent']) && isset($_POST['lieu_sssu']) && isset($_POST['lieu_date']) && isset($_POST['lieu_heure']) && isset($_POST['desc_plainte']))
+        {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) 
+            {
+                $nombre = mb_strlen($phone);
+                if($nombre == 10)
+                {
+                    $message = 
+                        "
+                        <div class='card-body'>
+                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                <strong>Enregistrement réussi!</strong>
+                                plainte ajouter avec succès succès.
+                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                        </div>
+                        ";
+                }
+                else
+                    $erreur = 
+                        "
+                        <div class='card-body'>
+                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                <strong>Erreur!</strong>
+                                'Numéro de téléphone incorrecte, exemple<b> 07 XX XX XX XX</b>.'
+                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                        </div>
+                        ";
+            } 
+            else
+                $erreur = 
+                    "
+                    <div class='card-body'>
+                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                <strong>Erreur!</strong>
+                                Adresse mail incorrecte <b>vide</b>.
+                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                        </div>
+                    ";
+        } 
+        else 
+            $erreur = 
+                "
+                <div class='card-body'>
+                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        <strong>Erreur!</strong>
+                        'Veuillez renseigner tous les champs <b>vide</b>.'
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>
+                </div>
+                
+                ";
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -41,7 +127,6 @@
 </style>
 <body>
 
-
 <div class="main-wrapper">
 
     <div class="header"></div>
@@ -53,9 +138,15 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-12">
+                            <?php echo $message; echo $erreur; ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Bienvenue sur la plateforme de gestion de plainte</h1>
+                                <h1>Bienvenue sur la plateforme de gestion de plainte "Safe"</h1>
                             </div>
                         </div>
                     </div>
@@ -68,16 +159,12 @@
                                 <div class="form-group">
                                     <label class="form-label">Autorisation d'utilisation de donnée personnelle</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender_male" value="option1">
-                                        <label class="form-check-label" for="gender_male">
-                                        Anonyme
-                                        </label>
+                                        <input class="form-check-input" type="radio" name="anony" id="anony" require value="<?=$_POST['anony']?>">
+                                        <label class="form-check-label" for="anony">Anonyme</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender_female" value="option2">
-                                        <label class="form-check-label" for="gender_female">
-                                        Non anonyme
-                                        </label>
+                                        <input class="form-check-input" type="radio" name="anony" id="anony_non" require value="<?=$_POST['anony']?>">
+                                        <label class="form-check-label" for="anony_non">Non anonyme</label>
                                     </div>
                                 </div>
                             </div>
@@ -86,13 +173,13 @@
                                 <div class="form-group">
                                     <label class="form-label">Autorisez-vous l'ONG Engage & Share à utiliser vos données ?</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender_male" value="option1">
+                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_male" value="<?=$_POST['auth_data']?>">
                                         <label class="form-check-label" for="gender_male">
                                         Oui
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender_female" value="option2">
+                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_female" value="<?=$_POST['auth_data']?>">
                                         <label class="form-check-label" for="gender_female">
                                         Non (utiliser tout sauf mon nom)
                                         </label>
@@ -103,35 +190,35 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Nom et prénoms</label>
-                                    <input type="text">
+                                    <input type="text" class="form-control" name="fullname" required value="<?=$_POST['fullname']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Téléphone</label>
-                                    <input type="text">
+                                    <input type="number" class="form-control" name="phone" required value="<?=$_POST['phone']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text">
+                                    <input type="email" class="form-control" name="email" required value="<?=$_POST['email']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Lieu d'habitation</label>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" required name="habitation"><?=$_POST['habitation']?></textarea>
                                 </div>
                             </div>
                             
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Pays</label>
-                                    <select class="form-control">
+                                    <select name="pays" required value="<?=$_POST['pays']?>" class="form-control">
                                         <option>Choose Category</option>
                                         <option>Computers</option>
                                     </select>
@@ -141,7 +228,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Région</label>
-                                    <select class="form-control">
+                                    <select name="region" required value="<?=$_POST['region']?>" class="form-control">
                                         <option>Choose Category</option>
                                         <option>Computers</option>
                                     </select>
@@ -151,7 +238,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Ville</label>
-                                    <select class="form-control">
+                                    <select name="ville" required value="<?=$_POST['ville']?>" class="form-control">
                                         <option>Choose Category</option>
                                         <option>Computers</option>
                                     </select>
@@ -161,7 +248,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Commune</label>
-                                    <select class="form-control">
+                                    <select name="commune" required value="<?=$_POST['commune']?>" class="form-control">
                                         <option>Choose Category</option>
                                         <option>Computers</option>
                                     </select>
@@ -171,7 +258,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Âge</label>
-                                    <select class="form-control">
+                                    <select name="age" required value="<?=$_POST['age']?>" class="form-control">
                                         <option>Choose Category</option>
                                         <option>Computers</option>
                                     </select>
@@ -184,7 +271,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Situation professionnelle</label>
-                                    <select class="form-control">
+                                    <select name="statut_pro" required value="<?=$_POST['statut_pro']?>" class="form-control">
                                     <option>Choose Sub Category</option>
                                     <option>Fruits</option>
                                     </select>
@@ -194,7 +281,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Niveau scolaire</label>
-                                    <select class="form-control">
+                                    <select name="nscolaire" required value="<?=$_POST['nscolaire']?>" class="form-control">
                                     <option>Choose Brand</option>
                                     <option>Brand</option>
                                     </select>
@@ -204,14 +291,14 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Nom de l' établissement scolaire</label>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" name="etab_scolaire"><?=$_POST['etab_scolaire']?></textarea>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Classe</label>
-                                    <select class="form-control">
+                                    <select name="classe" required value="<?=$_POST['classe']?>" class="form-control">
                                     <option>Choose Unit</option>
                                     <option>Unit</option>
                                     </select>
@@ -224,7 +311,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Thématique</label>
-                                    <select class="form-control">
+                                    <select name="thematique" required value="<?=$_POST['thematique']?>" class="form-control">
                                     <option>Choose Unit</option>
                                     <option>Unit</option>
                                     </select>
@@ -234,52 +321,51 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Nom de l'agent qui vous a reçu</label>
-                                    <input type="text">
+                                    <input type="text" name="name_agent" required value="<?=$_POST['name_agent']?>" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Lieu du SSSU-SAJ( ancien médico scolaire) où l'abus a eu lieu</label>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" require name="lieu_sssu"><?=$_POST['lieu_sssu']?></textarea>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Date à laquelle l'abus a eu lieu</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" name="lieu_date" required value="<?=$_POST['lieu_date']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Heure à laquelle l'abus a eu lieu</label>
-                                    <input type="time" class="form-control">
+                                    <input type="time" class="form-control" name="lieu_heure" required value="<?=$_POST['lieu_heure']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Description de la plainte</label>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" require name="desc_plainte"><?=$_POST['desc_plainte']?></textarea>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Recommandation</label>
+                                <div class="text-info">
+                                    <label><strong>Recommandations</strong></label>
                                     <p>
-                                        toutes vos informations personnelles seront confidentielles. <strong>L'ONG Engage & Share</strong> vous garantit que vos informations seront protégées.
-                                    </p>
+                                        Toutes vos informations personnelles seront confidentielles. <strong>L'ONG Engage & Share</strong> vous garantir que vos informations seront protégées.
+                                    </p><br>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label class="form-label">Autorisation d'utilisation de donnée personnelle</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender_male" value="option1">
+                                        <input class="form-check-input" require type="radio" name="confirmation" id="gender_male" value="oui">
                                         <label class="form-check-label" for="gender_male">
                                         Je confirme l'exactitude des informations fournis.
                                         </label>
