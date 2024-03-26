@@ -1,9 +1,6 @@
 <?php
     require_once 'routes/functions.php';
 
-    $message = "";
-    $erreur = "";
-
     if(isset($_POST['plainte']))
     {
         $anony = htmlspecialchars(trim(strip_tags($_POST['anony'])));
@@ -12,78 +9,399 @@
         $phone = htmlspecialchars(trim(strip_tags($_POST['phone'])));
         $email = htmlspecialchars(trim(strip_tags($_POST['email'])));
         $habitation = htmlspecialchars(trim(strip_tags($_POST['habitation'])));
-        $pays = htmlspecialchars(trim(strip_tags($_POST['pays'])));
-        $region = htmlspecialchars(trim(strip_tags($_POST['region'])));
-        $ville = htmlspecialchars(trim(strip_tags($_POST['ville'])));
-        $commune = htmlspecialchars(trim(strip_tags($_POST['commune'])));
-        $age = htmlspecialchars(trim(strip_tags($_POST['age'])));
-        $statut_pro = htmlspecialchars(trim(strip_tags($_POST['statut_pro'])));
-        $nscolaire = htmlspecialchars(trim(strip_tags($_POST['nscolaire'])));
+        $iDpays = htmlspecialchars(trim(strip_tags($_POST['iDpays'])));
+        $iDregion = htmlspecialchars(trim(strip_tags($_POST['iDregion'])));
+        $iDville = htmlspecialchars(trim(strip_tags($_POST['iDville'])));
+        $iDcommune = htmlspecialchars(trim(strip_tags($_POST['iDcommune'])));
+        $iDage = htmlspecialchars(trim(strip_tags($_POST['iDage'])));
+        $iDstatut_pro = htmlspecialchars(trim(strip_tags($_POST['iDstatut_pro'])));
+        $iDnscolaire = htmlspecialchars(trim(strip_tags($_POST['iDnscolaire'])));
         $etab_scolaire = htmlspecialchars(trim(strip_tags($_POST['etab_scolaire'])));
-        $classe = htmlspecialchars(trim(strip_tags($_POST['classe'])));
-        $thematique = htmlspecialchars(trim(strip_tags($_POST['thematique'])));
+        $iDclasse = htmlspecialchars(trim(strip_tags($_POST['iDclasse'])));
+        $iDthematique = htmlspecialchars(trim(strip_tags($_POST['iDthematique'])));
         $name_agent = htmlspecialchars(trim(strip_tags($_POST['name_agent'])));
         $lieu_sssu = htmlspecialchars(trim(strip_tags($_POST['lieu_sssu'])));
         $temps = strtr($_REQUEST['lieu_date'], '/', '-');
         $lieu_date = date('Y-m-d', strtotime($temps));
         $lieu_heure = htmlspecialchars(trim(strip_tags($_POST['lieu_heure'])));
         $desc_plainte = htmlspecialchars(trim(strip_tags($_POST['desc_plainte'])));
+        $confirmation = htmlspecialchars(trim(strip_tags($_POST['confirmation'])));
         
-        if(isset($_POST['anony']) && isset($_POST['auth_data']) && isset($_POST['fullname']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['habitation']) && isset($_POST['pays']) && isset($_POST['region']) && isset($_POST['ville']) && isset($_POST['commune']) && isset($_POST['age']) && isset($_POST['statut_pro']) && isset($_POST['nscolaire']) && isset($_POST['etab_scolaire']) && isset($_POST['classe']) && isset($_POST['thematique']) && isset($_POST['name_agent']) && isset($_POST['lieu_sssu']) && isset($_POST['lieu_date']) && isset($_POST['lieu_heure']) && isset($_POST['desc_plainte']))
+        if(!empty($_POST['anony']))
         {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) 
+            if(!empty($_POST['auth_data']))
             {
-                $nombre = mb_strlen($phone);
-                if($nombre == 10)
+                if(!empty($_POST['fullname']))
                 {
-                    $message = 
-                        "
-                        <div class='card-body'>
-                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                <strong>Enregistrement réussi!</strong>
-                                plainte ajouter avec succès succès.
-                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                            </div>
-                        </div>
-                        ";
+                    if(!empty($_POST['phone']))
+                    {
+                        if(!empty($_POST['email']))
+                        {
+                            if(!empty($_POST['habitation']))
+                            {
+                                if(!empty($_POST['iDpays']))
+                                {
+                                    if(!empty($_POST['iDregion']))
+                                    {
+                                        if(!empty($_POST['iDville']))
+                                        {
+                                            if(!empty($_POST['iDcommune']))
+                                            {
+                                                if(!empty($_POST['iiDage']))
+                                                {
+                                                    if(!empty($_POST['iDstatut_pro']))
+                                                    {
+                                                        if(!empty($_POST['iDnscolaire']))
+                                                        {
+                                                            if(!empty($_POST['etab_scolaire']))
+                                                            {
+                                                                if(!empty($_POST['iDclasse']))
+                                                                {
+                                                                    if(!empty($_POST['iDthematique']))
+                                                                    {
+                                                                        if(!empty($_POST['name_agent']))
+                                                                        {
+                                                                            if(!empty($_POST['lieu_sssu']))
+                                                                            {
+                                                                                if(!empty($_POST['lieu_date']))
+                                                                                {
+                                                                                    if(!empty($_POST['lieu_heure']))
+                                                                                    {
+                                                                                        if(!empty($_POST['desc_plainte']))
+                                                                                        {
+                                                                                            if (filter_var($email, FILTER_VALIDATE_EMAIL)) 
+                                                                                            {
+                                                                                                $nombre = mb_strlen($phone);
+                                                                                                if($nombre == 10)
+                                                                                                {
+                                                                                                    addPlainte($anony,$auth_data,$fullname,$phone,$email,$habitation,$iDpays,$iDregion,$iDville,$iDcommune,$iDage,$iDstatut_pro,$iDnscolaire,$etab_scolaire,$iDclasse,$iDthematique,$name_agent,$lieu_sssu,$lieu_date,$lieu_heure,$desc_plainte,$confirmation);
+                                                                                                    $message = 
+                                                                                                        "
+                                                                                                        <div class='card-body'>
+                                                                                                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                                                                                                <strong>Enregistrement réussi !</strong>
+                                                                                                                plainte ajouter avec succès succès.
+                                                                                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        ";
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    $erreur[] = 
+                                                                                                        "
+                                                                                                        <div class='card-body'>
+                                                                                                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                                                <strong>Erreur !</strong>
+                                                                                                                'Numéro de téléphone incorrecte, exemple<b> 07 XX XX XX XX</b>.'
+                                                                                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        ";
+                                                                                                }      
+                                                                                            } 
+                                                                                            else
+                                                                                            {
+                                                                                                $erreur[] = "
+                                                                                                    <div class='card-body'>
+                                                                                                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                                                <strong>Erreur !</strong>
+                                                                                                                Adresse mail incorrecte <b>vide</b>.
+                                                                                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    ";
+                                                                                            }
+                                                                                        }
+                                                                                        else
+                                                                                            {
+                                                                                                $erreur[] = 
+                                                                                                    "
+                                                                                                    <div class='card-body'>
+                                                                                                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                                            <strong>Erreur !</strong>
+                                                                                                            le champ description de la plainte est vide
+                                                                                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    ";
+                                                                                            } 
+                                                                                    }else
+                                                                                        {
+                                                                                            $erreur[] = 
+                                                                                                "
+                                                                                                <div class='card-body'>
+                                                                                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                                        <strong>Erreur !</strong>
+                                                                                                        le champ heure est vide
+                                                                                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                ";
+                                                                                        } 
+                                                                                }
+                                                                                else
+                                                                                        {
+                                                                                            $erreur[] = 
+                                                                                                "
+                                                                                                <div class='card-body'>
+                                                                                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                                        <strong>Erreur !</strong>
+                                                                                                        le champ date est vide
+                                                                                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                ";
+                                                                                        }  
+                                                                            }
+                                                                            else
+                                                                                {
+                                                                                    $erreur[] = 
+                                                                                        "
+                                                                                        <div class='card-body'>
+                                                                                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                                <strong>Erreur !</strong>
+                                                                                                le champ lieu du SSSHU est vide
+                                                                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        ";
+                                                                                } 
+                                                                        }else
+                                                                            {
+                                                                                $erreur[] = 
+                                                                                    "
+                                                                                    <div class='card-body'>
+                                                                                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                            <strong>Erreur !</strong>
+                                                                                            le champ nom de l'agent est vide
+                                                                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    ";
+                                                                            } 
+                                                                    }else
+                                                                        {
+                                                                            $erreur[] = 
+                                                                                "
+                                                                                <div class='card-body'>
+                                                                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                        <strong>Erreur !</strong>
+                                                                                        le champ thématique est vide
+                                                                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                ";
+                                                                        } 
+                                                                }else
+                                                                        {
+                                                                            $erreur[] = 
+                                                                                "
+                                                                                <div class='card-body'>
+                                                                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                        <strong>Erreur !</strong>
+                                                                                        le champ classe est vide
+                                                                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                ";
+                                                                        } 
+                                                            }else
+                                                                {
+                                                                    $erreur[] = 
+                                                                        "
+                                                                        <div class='card-body'>
+                                                                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                                <strong>Erreur !</strong>
+                                                                                le champ nom de l'établissement scolaire est vide
+                                                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                            </div>
+                                                                        </div>
+                                                                        ";
+                                                                }
+                                                        }
+                                                        else
+                                                            {
+                                                                $erreur[] = 
+                                                                    "
+                                                                    <div class='card-body'>
+                                                                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                            <strong>Erreur !</strong>
+                                                                            le champ niveau scolaire est vide
+                                                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                        </div>
+                                                                    </div>
+                                                                    ";
+                                                            } 
+                                                    }
+                                                    else
+                                                        {
+                                                            $erreur[] = 
+                                                                "
+                                                                <div class='card-body'>
+                                                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                        <strong>Erreur !</strong>
+                                                                        le champ situation professionnelle est vide
+                                                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                    </div>
+                                                                </div>
+                                                                ";
+                                                        }
+                                                }
+                                                else
+                                                    {
+                                                        $erreur[] = 
+                                                            "
+                                                            <div class='card-body'>
+                                                                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                    <strong>Erreur !</strong>
+                                                                    le champ age est vide
+                                                                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                                </div>
+                                                            </div>
+                                                            ";
+                                                    } 
+                                            }
+                                            else
+                                                {
+                                                    $erreur[] = 
+                                                        "
+                                                        <div class='card-body'>
+                                                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                                <strong>Erreur !</strong>
+                                                                le champ commune est vide
+                                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                            </div>
+                                                        </div>
+                                                        ";
+                                                } 
+                                        }
+                                        else
+                                            {
+                                                $erreur[] = 
+                                                    "
+                                                    <div class='card-body'>
+                                                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                            <strong>Erreur !</strong>
+                                                            le champ ville est vide
+                                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                            } 
+                                    }else
+                                        {
+                                            $erreur[] = 
+                                                "
+                                                <div class='card-body'>
+                                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                        <strong>Erreur !</strong>
+                                                        le champ région est vide
+                                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                    </div>
+                                                </div>
+                                                ";
+                                        }
+                                }
+                                else
+                                    {
+                                        $erreur[] = 
+                                            "
+                                            <div class='card-body'>
+                                                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                    <strong>Erreur !</strong>
+                                                    le champ pays est vide
+                                                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                </div>
+                                            </div>
+                                            ";
+                                    }
+                            }
+                            else
+                                {
+                                    $erreur[] = 
+                                        "
+                                        <div class='card-body'>
+                                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                <strong>Erreur !</strong>
+                                                le champ lieu d'habitation est vide
+                                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                            </div>
+                                        </div>
+                                        ";
+                                }  
+                        }
+                        else
+                            {
+                                $erreur[] = 
+                                    "
+                                    <div class='card-body'>
+                                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                            <strong>Erreur !</strong>
+                                            le champ email est vide
+                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                        </div>
+                                    </div>
+                                    ";
+                            } 
+                    }
+                    else
+                        {
+                            $erreur[] = 
+                                "
+                                <div class='card-body'>
+                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                        <strong>Erreur !</strong>
+                                        le champ téléphone est vide
+                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                    </div>
+                                </div>
+                                ";
+                        }
                 }
                 else
-                    $erreur = 
+                    {
+                        $erreur[] = 
+                            "
+                            <div class='card-body'>
+                                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                    <strong>Erreur !</strong>
+                                    le champ nom & prénoms est vide
+                                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                </div>
+                            </div>
+                            ";
+                    } 
+            }
+            else
+                {
+                    $erreur[] = 
                         "
                         <div class='card-body'>
                             <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                <strong>Erreur!</strong>
-                                'Numéro de téléphone incorrecte, exemple<b> 07 XX XX XX XX</b>.'
+                                <strong>Erreur !</strong>
+                                le champ autorisation d'utiliser voos données est vide
                                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                             </div>
                         </div>
                         ";
-            } 
-            else
-                $erreur = 
+                } 
+        }
+        else
+            {
+                $erreur[] = 
                     "
                     <div class='card-body'>
-                            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                <strong>Erreur!</strong>
-                                Adresse mail incorrecte <b>vide</b>.
-                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                            </div>
+                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            <strong>Erreur !</strong>
+                            le champ autoorisation  de donnée anonyme ou non anonyme est vide
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                         </div>
-                    ";
-        } 
-        else 
-            $erreur = 
-                "
-                <div class='card-body'>
-                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                        <strong>Erreur!</strong>
-                        'Veuillez renseigner tous les champs <b>vide</b>.'
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                     </div>
-                </div>
-                
-                ";
+                    ";
+            } 
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -96,7 +414,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Formulaire de plainte</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="vendors/assets/img/favicon.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="vendor/assets/img/favicon.jpg">
 
     <link rel="stylesheet" href="vendors/assets/css/bootstrap.min.css">
 
@@ -139,7 +457,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <?php echo $message; echo $erreur; ?>
+                            <?php if(!empty($erreur)){
+
+                                foreach($erreur as $erreurs)
+                                {
+                                    echo $erreurs;
+                                }
+
+                            } ?>
                         </div>
                     </div>
 
@@ -159,11 +484,11 @@
                                 <div class="form-group">
                                     <label class="form-label">Autorisation d'utilisation de donnée personnelle</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="anony" id="anony" require value="<?=$_POST['anony']?>">
+                                        <input class="form-check-input" type="radio" name="anony" id="anony" require value="Anonyme">
                                         <label class="form-check-label" for="anony">Anonyme</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="anony" id="anony_non" require value="<?=$_POST['anony']?>">
+                                        <input class="form-check-input" type="radio" name="anony" id="anony_non" require value="Non-anonyme">
                                         <label class="form-check-label" for="anony_non">Non anonyme</label>
                                     </div>
                                 </div>
@@ -173,13 +498,13 @@
                                 <div class="form-group">
                                     <label class="form-label">Autorisez-vous l'ONG Engage & Share à utiliser vos données ?</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_male" value="<?=$_POST['auth_data']?>">
+                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_male" value="Oui">
                                         <label class="form-check-label" for="gender_male">
                                         Oui
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_female" value="<?=$_POST['auth_data']?>">
+                                        <input class="form-check-input" type="radio" name="auth_data" id="gender_female" value="Non, sauf nom">
                                         <label class="form-check-label" for="gender_female">
                                         Non (utiliser tout sauf mon nom)
                                         </label>
@@ -190,37 +515,49 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Nom et prénoms</label>
-                                    <input type="text" class="form-control" name="fullname" required value="<?=$_POST['fullname']?>">
+                                    <input type="text" class="form-control" name="fullname"  value="<?=$_POST['fullname']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Téléphone</label>
-                                    <input type="number" class="form-control" name="phone" required value="<?=$_POST['phone']?>">
+                                    <input type="number" class="form-control" name="phone"  value="<?=$_POST['phone']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email" required value="<?=$_POST['email']?>">
+                                    <input type="email" class="form-control" name="email"  value="<?=$_POST['email']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Lieu d'habitation</label>
-                                    <textarea class="form-control" required name="habitation"><?=$_POST['habitation']?></textarea>
+                                    <textarea class="form-control"  name="habitation"><?=$_POST['habitation']?></textarea>
                                 </div>
                             </div>
                             
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Pays</label>
-                                    <select name="pays" required value="<?=$_POST['pays']?>" class="form-control">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
+                                    <select name="iDpays"  value="<?=$_POST['iDpays']?>" class="form-control">
+                                    <option value="">-- select pays --</option>
+                                    <?php 
+                                        global $db;
+                                        $sql = 'SELECT * FROM pays';
+                                        $query = $db->prepare($sql);
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                        foreach($result as $results)       
+                                        { 
+                                    ?>
+                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                    <?php 
+                                        } 
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -228,9 +565,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Région</label>
-                                    <select name="region" required value="<?=$_POST['region']?>" class="form-control">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
+                                    <select name="iDregion"  value="<?=$_POST['iDregion']?>" class="form-control">
+                                    <option value="">-- select region --</option>
+                                    <?php 
+                                        global $db;
+                                        $sql = 'SELECT * FROM region';
+                                        $query = $db->prepare($sql);
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                        foreach($result as $results)       
+                                        { 
+                                    ?>
+                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                    <?php 
+                                        } 
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -238,9 +587,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Ville</label>
-                                    <select name="ville" required value="<?=$_POST['ville']?>" class="form-control">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
+                                    <select name="iDville"  value="<?=$_POST['iDville']?>" class="form-control">
+                                    <option value="">-- select ville --</option>
+                                    <?php 
+                                        global $db;
+                                        $sql = 'SELECT * FROM ville';
+                                        $query = $db->prepare($sql);
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                        foreach($result as $results)       
+                                        { 
+                                    ?>
+                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                    <?php 
+                                        } 
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -248,9 +609,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Commune</label>
-                                    <select name="commune" required value="<?=$_POST['commune']?>" class="form-control">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
+                                    <select name="iDcommune"  value="<?=$_POST['iDcommune']?>" class="form-control">
+                                    <option value="">-- select commune --</option>
+                                    <?php 
+                                        global $db;
+                                        $sql = 'SELECT * FROM commune';
+                                        $query = $db->prepare($sql);
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                        foreach($result as $results)       
+                                        { 
+                                    ?>
+                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                    <?php 
+                                        } 
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -258,9 +631,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Âge</label>
-                                    <select name="age" required value="<?=$_POST['age']?>" class="form-control">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
+                                    <select name="iDage"  value="<?=$_POST['iDage']?>" class="form-control">
+                                    <option value="">-- select age --</option>
+                                    <?php 
+                                        global $db;
+                                        $sql = 'SELECT * FROM age';
+                                        $query = $db->prepare($sql);
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                        foreach($result as $results)       
+                                        { 
+                                    ?>
+                                        <option value="<?= $results->id;?>"><?=$results->libelle; ?> ans</option>
+                                    <?php 
+                                        } 
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -271,9 +656,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Situation professionnelle</label>
-                                    <select name="statut_pro" required value="<?=$_POST['statut_pro']?>" class="form-control">
-                                    <option>Choose Sub Category</option>
-                                    <option>Fruits</option>
+                                    <select name="iDstatut_pro"  value="<?=$_POST['iDstatut_pro']?>" class="form-control">
+                                        <option value="">-- select situation pro --</option>
+                                        <?php 
+                                            global $db;
+                                            $sql = 'SELECT * FROM situation_pro';
+                                            $query = $db->prepare($sql);
+                                            $query->execute();
+                                            $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach($result as $results)       
+                                            { 
+                                        ?>
+                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <?php 
+                                            } 
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -281,9 +678,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Niveau scolaire</label>
-                                    <select name="nscolaire" required value="<?=$_POST['nscolaire']?>" class="form-control">
-                                    <option>Choose Brand</option>
-                                    <option>Brand</option>
+                                    <select name="iDnscolaire"  value="<?=$_POST['iDnscolaire']?>" class="form-control">
+                                        <option value="">-- select niveau scolaire --</option>
+                                        <?php 
+                                            global $db;
+                                            $sql = 'SELECT * FROM nscolaire';
+                                            $query = $db->prepare($sql);
+                                            $query->execute();
+                                            $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach($result as $results)       
+                                            { 
+                                        ?>
+                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <?php 
+                                            } 
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -298,9 +707,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Classe</label>
-                                    <select name="classe" required value="<?=$_POST['classe']?>" class="form-control">
-                                    <option>Choose Unit</option>
-                                    <option>Unit</option>
+                                    <select name="iDclasse"  value="<?=$_POST['iDclasse']?>" class="form-control">
+                                        <option value="">-- select classe --</option>
+                                        <?php 
+                                            global $db;
+                                            $sql = 'SELECT * FROM classe';
+                                            $query = $db->prepare($sql);
+                                            $query->execute();
+                                            $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach($result as $results)       
+                                            { 
+                                        ?>
+                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <?php 
+                                            } 
+                                        ?>    
                                     </select>
                                 </div>
                             </div>
@@ -311,9 +732,21 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Thématique</label>
-                                    <select name="thematique" required value="<?=$_POST['thematique']?>" class="form-control">
-                                    <option>Choose Unit</option>
-                                    <option>Unit</option>
+                                    <select name="iDthematique"  value="<?=$_POST['iDthematique']?>" class="form-control">
+                                    <option value="">-- select thématique --</option>
+                                        <?php 
+                                            global $db;
+                                            $sql = 'SELECT * FROM thematique';
+                                            $query = $db->prepare($sql);
+                                            $query->execute();
+                                            $result = $query->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach($result as $results)       
+                                            { 
+                                        ?>
+                                            <option value="<?= $results->id;?>"><?=$results->libelle; ?></option>
+                                        <?php 
+                                            } 
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -321,7 +754,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Nom de l'agent qui vous a reçu</label>
-                                    <input type="text" name="name_agent" required value="<?=$_POST['name_agent']?>" class="form-control">
+                                    <input type="text" name="name_agent"  value="<?=$_POST['name_agent']?>" class="form-control">
                                 </div>
                             </div>
 
@@ -335,14 +768,14 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Date à laquelle l'abus a eu lieu</label>
-                                    <input type="date" class="form-control" name="lieu_date" required value="<?=$_POST['lieu_date']?>">
+                                    <input type="date" class="form-control" name="lieu_date"  value="<?=$_POST['lieu_date']?>">
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Heure à laquelle l'abus a eu lieu</label>
-                                    <input type="time" class="form-control" name="lieu_heure" required value="<?=$_POST['lieu_heure']?>">
+                                    <input type="time" class="form-control" name="lieu_heure"  value="<?=$_POST['lieu_heure']?>">
                                 </div>
                             </div>
 
@@ -357,7 +790,7 @@
                                 <div class="text-info">
                                     <label><strong>Recommandations</strong></label>
                                     <p>
-                                        Toutes vos informations personnelles seront confidentielles. <strong>L'ONG Engage & Share</strong> vous garantir que vos informations seront protégées.
+                                        Toutes vos informations personnelles seront confidentielles.<br/> <strong>L'ONG Engage & Share</strong> vous garantir que vos informations seront protégées.
                                     </p><br>
                                 </div>
                             </div>
@@ -365,8 +798,8 @@
                             <div class="col-lg-12 col-sm-6 col-12">
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" require type="radio" name="confirmation" id="gender_male" value="oui">
-                                        <label class="form-check-label" for="gender_male">
+                                        <input class="form-check-input" require type="radio" name="confirmation" id="confirme" value="oui">
+                                        <label class="form-check-label" for="confirme">
                                         Je confirme l'exactitude des informations fournis.
                                         </label>
                                     </div>
